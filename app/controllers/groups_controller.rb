@@ -1,9 +1,10 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user! , only: [:new, :create]
+  before_action :authenticate_user! , only: [:new, :create, :edit, :destroy, :update]
+  before_action :find_group_and_permission, only: [:edit, :update, :destroy]
 
-  def index
-    @groups = Group.all
-  end
+def index
+  @groups = Group.all
+end
 
 def new
   @group = Group.new
@@ -14,12 +15,9 @@ def show
 end
 
 def edit
-  @group = Group.find(params[:id])
 end
 
 def update
-  @group = Group.find(params[:id])
-
   if @group.update(group_params)
   redirect_to groups_path, notice: "电影信息更新成功"
   else
@@ -30,7 +28,7 @@ end
 def create
   @group = Group.new(group_params)
   @group.user = current_user
-  
+
   if @group.save
     redirect_to groups_path
   else
@@ -39,7 +37,6 @@ def create
 end
 
 def destroy
-  @group = Group.find(params[:id])
   @group.destroy
   flash[:alert] = "电影删除成功"
   redirect_to groups_path
@@ -47,6 +44,10 @@ end
 
 
 private
+
+def find_group_and_permission
+  find_group_and_permission
+end
 
 def group_params
   params.require(:group).permit(:title, :description)
