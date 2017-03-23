@@ -4,8 +4,12 @@
     <span class="pull-right">
       <% if current_user && current_user.is_member_of?(@group) %>
         <label class="label label-success"> 粉丝 </label>
+        <%= link_to("粉转黑", quit_group_path(@group), method: :post, class: "btn btn-default") %>
+
       <% else %>
+
         <label class="label label-warning"> 您还未收藏该电影 </label>
+          <%= link_to("成为粉丝", join_group_path(@group), method: :post, class: "btn btn-default") %>
       <% end %>
     </span>
 
