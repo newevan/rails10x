@@ -20,7 +20,7 @@
           <td><%= group.user.email %> </td>
           <td>
           <% if current_user && current_user == group.user %>
-          <%= link_to("编辑电影资料t", edit_group_path(group), class: "btn btn-sm btn-default")%>
+          <%= link_to("编辑电影资料", edit_group_path(group), class: "btn btn-sm btn-default")%>
           <%= link_to("删除电影", group_path(group),    class: "btn btn-sm btn-default",
                       method: :delete, data: { confirm: "Are you sure?" } )%>
             <% end %>
